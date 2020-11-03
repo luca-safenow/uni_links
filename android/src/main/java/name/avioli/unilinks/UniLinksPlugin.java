@@ -39,7 +39,11 @@ public class UniLinksPlugin
                 initialIntent = false;
             }
             latestLink = dataString;
-            if (changeReceiver != null) changeReceiver.onReceive(context, intent);
+            //if (changeReceiver != null) changeReceiver.onReceive(context, intent);
+            if (changeReceiver != null) {
+                changeReceiver.onReceive(context, intent);
+                latestLink = null;
+            }
         }
     }
 
@@ -110,6 +114,7 @@ public class UniLinksPlugin
             result.success(initialLink);
         } else if (call.method.equals("getLatestLink")) {
             result.success(latestLink);
+            latestLink = null;
         } else {
             result.notImplemented();
         }
